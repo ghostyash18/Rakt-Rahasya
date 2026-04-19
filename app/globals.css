@@ -1,0 +1,186 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap');
+
+:root {
+  --foreground-rgb: 0, 0, 0;
+  --background-start-rgb: 214, 219, 220;
+  --background-end-rgb: 255, 255, 255;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --foreground-rgb: 255, 255, 255;
+    --background-start-rgb: 0, 0, 0;
+    --background-end-rgb: 0, 0, 0;
+  }
+}
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+html,
+body {
+  max-width: 100vw;
+  overflow-x: hidden;
+  font-family: 'Inter', system-ui, sans-serif;
+}
+
+body {
+  color: rgb(var(--foreground-rgb));
+  background: linear-gradient(
+      to bottom,
+      transparent,
+      rgb(var(--background-end-rgb))
+    )
+    rgb(var(--background-start-rgb));
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+@media (prefers-color-scheme: dark) {
+  html {
+    color-scheme: dark;
+  }
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: #1a1d20;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #dc2626;
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #b91c1c;
+}
+
+/* Custom components */
+@layer components {
+  .btn-primary {
+    @apply bg-crimson-600 hover:bg-crimson-700 text-white font-medium py-3 px-6 rounded-xl transition-colors duration-200 shadow-lg hover:shadow-xl;
+  }
+  
+  .btn-secondary {
+    @apply bg-charcoal-700 hover:bg-charcoal-600 text-white font-medium py-3 px-6 rounded-xl transition-colors duration-200 border border-charcoal-600;
+  }
+  
+  .card-dark {
+    @apply bg-charcoal-800 border border-charcoal-700 rounded-2xl p-6 shadow-xl;
+  }
+  
+  .text-gradient {
+    @apply bg-gradient-to-r from-crimson-500 to-softPink-500 bg-clip-text text-transparent;
+  }
+  
+  .glass-effect {
+    @apply bg-white/10 backdrop-blur-md border border-white/20;
+  }
+  
+  .mood-icon {
+    @apply w-12 h-12 rounded-full flex items-center justify-center text-2xl transition-transform duration-200 hover:scale-110;
+  }
+  
+  .cycle-day {
+    @apply w-10 h-10 rounded-full flex items-center justify-center text-sm font-medium transition-all duration-200 cursor-pointer;
+  }
+  
+  .cycle-day.active {
+    @apply bg-crimson-600 text-white shadow-lg;
+  }
+  
+  .cycle-day.period {
+    @apply bg-softPink-500 text-white;
+  }
+  
+  .cycle-day.ovulation {
+    @apply bg-yellow-500 text-charcoal-900;
+  }
+  
+  .cycle-day.fertile {
+    @apply bg-green-500 text-white;
+  }
+  
+  .symptom-tag {
+    @apply bg-charcoal-700 text-softPink-300 px-3 py-1 rounded-full text-sm font-medium;
+  }
+  
+  .flow-dot {
+    @apply w-4 h-4 rounded-full border-2 border-charcoal-600 transition-all duration-200 cursor-pointer;
+  }
+  
+  .flow-dot.light {
+    @apply bg-softPink-300 border-softPink-400;
+  }
+  
+  .flow-dot.medium {
+    @apply bg-softPink-500 border-softPink-600;
+  }
+  
+  .flow-dot.heavy {
+    @apply bg-crimson-500 border-crimson-600;
+  }
+}
+
+/* Animations */
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+}
+
+.float-animation {
+  animation: float 3s ease-in-out infinite;
+}
+
+@keyframes pulse-glow {
+  0%, 100% { box-shadow: 0 0 5px rgba(220, 38, 38, 0.3); }
+  50% { box-shadow: 0 0 20px rgba(220, 38, 38, 0.6); }
+}
+
+.pulse-glow {
+  animation: pulse-glow 2s ease-in-out infinite;
+}
+
+/* Mobile optimizations */
+@media (max-width: 768px) {
+  .mobile-padding {
+    @apply px-4;
+  }
+  
+  .mobile-text {
+    @apply text-sm;
+  }
+  
+  .mobile-button {
+    @apply py-2 px-4 text-sm;
+  }
+}
+
+/* Accessibility */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Focus styles */
+.focus-visible:focus {
+  @apply outline-none ring-2 ring-crimson-500 ring-offset-2 ring-offset-charcoal-900;
+}
